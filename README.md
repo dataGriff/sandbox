@@ -1,13 +1,15 @@
 # sandbox
 
+## pub1
+
 ```mermaid
 C4Context
     title System Context diagram for Pub Allocation System
 
     Person(customer, "Pub Goer", "A customer of the pub in need of a drink.")
     System_Ext(pub_roulette, "Random Pub Chooser", "Allows customer to randomly find a pub to go to.")
-    System_Ext(pub_reminder, "Weekly Pub Reminder", "Reminds customer to attend a pub they liked from week before.")
     System_Ext(pub_fast_finder, "Quick Pub Chooser", "Allows customer to quickly find a pub with minimal input.")
+    System_Ext(pub_reminder, "Weekly Pub Reminder", "Reminds customer to attend a pub they liked from week before.")
     System(pubs, "Pubs API", "Allows services to retrieve information about pubs.")
     System_Ext(pub_files, "Pub Files", "Monthly pub details provided by pubs.")
     System_Ext(pubs_online, "Pubs Online", "Website that provides real-time pub information.")
@@ -21,9 +23,11 @@ C4Context
     Rel(pubs_online, pubs, "Updates")
     Rel(pub_files, pubs, "Updates")
 
-     UpdateLayoutConfig($c4ShapeInRow="4")
+     UpdateLayoutConfig($c4ShapeInRow="3")
 
 ```
+
+## pub2
 
 ```mermaid
 graph TB
@@ -61,23 +65,7 @@ graph TB
 
 ```
 
-```
- <!-- System_Ext(mail_system, "E-mail system", "The internal Microsoft Exchange e-mail system.")
-    System_Ext(mainframe, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
-
-    Rel(customer, pub_roulette, "Uses")
-    Rel_Back(customer, mail_system, "Sends e-mails to")
-    Rel_Back(pub_roulette, mail_system, "Sends e-mails", "SMTP")
-    Rel(banking_system, mainframe, "Uses")
-
-    UpdateElementStyle(customerA, $fontColor="red", $bgColor="grey", $borderColor="red")
-    UpdateRelStyle(Person, SystemAA, $textColor="blue", $lineColor="blue", $offsetX="5")
-    UpdateRelStyle(SystemAA, SystemE, $textColor="blue", $lineColor="blue", $offsetY="-10")
-    UpdateRelStyle(SystemAA, SystemC, $textColor="blue", $lineColor="blue", $offsetY="-40", $offsetX="-50")
-    UpdateRelStyle(SystemC, customerA, $textColor="red", $lineColor="red", $offsetX="-50", $offsetY="20")
-
-    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1") -->
-```
+## Source Diagram
 
 ```mermaid
 C4Context
