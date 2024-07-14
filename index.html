@@ -1,0 +1,595 @@
+<!doctype html>
+<html>
+  <head>
+    <title>FarmStall API</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>FarmStall API</h1>
+    <div class="app-desc"><p>An API for writing reviews about your favourite (or worst) farm stalls.</p>
+<p><img src="https://farmstall.designapis.com/img/produce-banner.jpg" alt="Picture of produce" /></p>
+<hr />
+<h1>Auth</h1>
+<p>To create <strong>Reviews</strong> without being <em>anonymous</em>. You need to add a <strong>MyUserToken</strong> to the <code>Authorization</code> header.</p>
+<p>To get a <strong>MyUserToken</strong>:</p>
+<ol>
+<li>Create a <strong>User</strong> with <a href="#Users/post_users">POST /users</a></li>
+<li>Get a <strong>MyUserToken</strong> by calling <a href="#Users/post_tokens">POST /tokens</a> with your <strong>User</strong> credentials.</li>
+</ol>
+<h1>Reviews</h1>
+<p>Reviews are the heart of this API. <br/>
+Registered <strong>Users</strong> and anonymous users can both write reviews based on their experience at farm stalls. <br/></p>
+<p>Each review comes with a rating of between one and five stars inclusive.</p>
+<ul>
+<li>One star being the worst experience</li>
+<li>Five stars being the best</li>
+</ul>
+<h3>Example Reviews</h3>
+<p>&quot;A wonderful time!&quot; — Bob McNally
+<br/>
+<img src="https://farmstall.designapis.com/img/rating-5.png" alt="5 stars" /></p>
+<p>&quot;An awful place&quot; — <em>Anonymous</em>
+<br/>
+<img src="https://farmstall.designapis.com/img/rating-1.png" alt="1 star" /></p>
+<p>&quot;A totally average place.&quot; — Jane Fair
+<br/>
+<img src="https://farmstall.designapis.com/img/rating-3.png" alt="3 stars" /></p>
+</div>
+    <div class="app-desc">More information: <a href="https://farmstall.designapis.com">https://farmstall.designapis.com</a></div>
+    <div class="app-desc">Contact Info: <a href="jponelat+daso@gmail.com">jponelat+daso@gmail.com</a></div>
+    <div class="app-desc">Version: v1</div>
+    <div class="app-desc">BasePath:/v1</div>
+    <div class="license-info">Apache 2.0</div>
+    <div class="license-url">https://www.apache.org/licenses/LICENSE-2.0</div>
+  <h2>Access</h2>
+    <ol>
+      <li>APIKey KeyParamName:Authorization KeyInQuery:false KeyInHeader:true</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Reviews">Reviews</a></h4>
+  <ul>
+  <li><a href="#reviewsGet"><code><span class="http-method">get</span> /reviews</code></a></li>
+  <li><a href="#reviewsPost"><code><span class="http-method">post</span> /reviews</code></a></li>
+  <li><a href="#reviewsReviewIdGet"><code><span class="http-method">get</span> /reviews/{reviewId}</code></a></li>
+  </ul>
+  <h4><a href="#Users">Users</a></h4>
+  <ul>
+  <li><a href="#tokensPost"><code><span class="http-method">post</span> /tokens</code></a></li>
+  <li><a href="#usersPost"><code><span class="http-method">post</span> /users</code></a></li>
+  </ul>
+
+  <h1><a name="Reviews">Reviews</a></h1>
+  <div class="method"><a name="reviewsGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /reviews</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">reviewsGet</span>)</div>
+    <div class="method-notes">Get a list of reviews</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">maxRating (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  default: null </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#_reviews_get_200_response_inner">_reviews_get_200_response_inner</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "rating" : 1,
+  "message" : "An awesome time for the whole family.",
+  "uuid" : "3b5b1707-b82c-4b1d-9078-157053902525",
+  "userId" : "3b5b1707-b82c-4b1d-9078-157053902525"
+}, {
+  "rating" : 1,
+  "message" : "An awesome time for the whole family.",
+  "uuid" : "3b5b1707-b82c-4b1d-9078-157053902525",
+  "userId" : "3b5b1707-b82c-4b1d-9078-157053902525"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A bunch of reviews
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="reviewsPost"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /reviews</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">reviewsPost</span>)</div>
+    <div class="method-notes">Create a new Review</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">_reviews_post_request <a href="#_reviews_post_request">_reviews_post_request</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#_reviews_post_201_response">_reviews_post_201_response</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rating" : 5,
+  "message" : "An awesome time for the whole family.",
+  "userId" : "3b5b1707-b82c-4b1d-9078-157053902525",
+  "uuid" : "3b5b1707-b82c-4b1d-9078-157053902525"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    Successfully created a new Review
+        <a href="#_reviews_post_201_response">_reviews_post_201_response</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="reviewsReviewIdGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /reviews/{reviewId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">reviewsReviewIdGet</span>)</div>
+    <div class="method-notes">Get a single review</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">reviewId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  default: null </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#_reviews__reviewId__get_200_response">_reviews__reviewId__get_200_response</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "rating" : 5,
+  "message" : "An awesome time for the whole family.",
+  "userId" : "3b5b1707-b82c-4b1d-9078-157053902525",
+  "uuid" : "3b5b1707-b82c-4b1d-9078-157053902525"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A single review
+        <a href="#_reviews__reviewId__get_200_response">_reviews__reviewId__get_200_response</a>
+    <h4 class="field-label">404</h4>
+    Review not found
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Users">Users</a></h1>
+  <div class="method"><a name="tokensPost"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /tokens</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">tokensPost</span>)</div>
+    <div class="method-notes">Create a new token</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">_tokens_post_request <a href="#_tokens_post_request">_tokens_post_request</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#_tokens_post_201_response">_tokens_post_201_response</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "token" : "token"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    Create a new token for gaining authenticated access to resources
+        <a href="#_tokens_post_201_response">_tokens_post_201_response</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="usersPost"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /users</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">usersPost</span>)</div>
+    <div class="method-notes">Create a new user</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">_users_post_request <a href="#_users_post_request">_users_post_request</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#_users_post_201_response">_users_post_201_response</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "uuid" : "f7f680a8-d111-421f-b6b3-493ebf905078",
+  "username" : "ponelat"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    Successfully created a new user
+        <a href="#_users_post_201_response">_users_post_201_response</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#_reviews__reviewId__get_200_response"><code>_reviews__reviewId__get_200_response</code> - </a></li>
+    <li><a href="#_reviews_get_200_response_inner"><code>_reviews_get_200_response_inner</code> - </a></li>
+    <li><a href="#_reviews_post_201_response"><code>_reviews_post_201_response</code> - </a></li>
+    <li><a href="#_reviews_post_request"><code>_reviews_post_request</code> - </a></li>
+    <li><a href="#_tokens_post_201_response"><code>_tokens_post_201_response</code> - </a></li>
+    <li><a href="#_tokens_post_request"><code>_tokens_post_request</code> - </a></li>
+    <li><a href="#_users_post_201_response"><code>_users_post_201_response</code> - </a></li>
+    <li><a href="#_users_post_request"><code>_users_post_request</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="_reviews__reviewId__get_200_response"><code>_reviews__reviewId__get_200_response</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">rating (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">userId (optional)</div><div class="param-desc"><span class="param-type"><a href="#">oas_any_type_not_mapped</a></span>  </div>
+<div class="param">uuid (optional)</div><div class="param-desc"><span class="param-type"><a href="#">oas_any_type_not_mapped</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="_reviews_get_200_response_inner"><code>_reviews_get_200_response_inner</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">rating (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">uuid (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">userId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="_reviews_post_201_response"><code>_reviews_post_201_response</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">rating (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">userId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">uuid (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="_reviews_post_request"><code>_reviews_post_request</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">rating (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="_tokens_post_201_response"><code>_tokens_post_201_response</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">token (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="_tokens_post_request"><code>_tokens_post_request</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: password</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="_users_post_201_response"><code>_users_post_201_response</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">uuid (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="_users_post_request"><code>_users_post_request</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: password</div>
+<div class="param">fullName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
