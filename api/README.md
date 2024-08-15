@@ -2,7 +2,7 @@
 brew install openapi-generator
 ```
 
-* [OpenAPI Generator](https://openapi-generator.tech/docs/usage)
+- [OpenAPI Generator](https://openapi-generator.tech/docs/usage)
 
 ```bash
 openapi-generator version

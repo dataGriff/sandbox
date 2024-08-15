@@ -6,26 +6,25 @@ from __future__ import annotations
 
 from typing import List, Optional
 
+from fastapi import FastAPI, Path, UploadFile
 from pydantic import conint, constr
 from starlette.requests import Request
-
-from fastapi import FastAPI, Path, UploadFile
 
 from .models import ApiResponse, Order, Pet, StatusEnum, User
 
 app = FastAPI(
-    description='This is a sample server Petstore server. For this sample, you can use the api key `special-key` to test the authorization filters.',
-    version='1.0.0',
-    title='OpenAPI Petstore',
+    description="This is a sample server Petstore server. For this sample, you can use the api key `special-key` to test the authorization filters.",
+    version="1.0.0",
+    title="OpenAPI Petstore",
     license={
-        'name': 'Apache-2.0',
-        'url': 'https://www.apache.org/licenses/LICENSE-2.0.html',
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
-    servers=[{'url': 'http://petstore.swagger.io/v2'}],
+    servers=[{"url": "http://petstore.swagger.io/v2"}],
 )
 
 
-@app.post('/pet', response_model=Pet, tags=['pet'])
+@app.post("/pet", response_model=Pet, tags=["pet"])
 def add_pet(body: Pet) -> Pet:
     """
     Add a new pet to the store
@@ -33,7 +32,7 @@ def add_pet(body: Pet) -> Pet:
     pass
 
 
-@app.put('/pet', response_model=Pet, tags=['pet'])
+@app.put("/pet", response_model=Pet, tags=["pet"])
 def update_pet(body: Pet) -> Pet:
     """
     Update an existing pet
@@ -41,7 +40,7 @@ def update_pet(body: Pet) -> Pet:
     pass
 
 
-@app.get('/pet/findByStatus', response_model=List[Pet], tags=['pet'])
+@app.get("/pet/findByStatus", response_model=List[Pet], tags=["pet"])
 def find_pets_by_status(status: List[StatusEnum1]) -> List[Pet]:
     """
     Finds Pets by status
@@ -49,7 +48,7 @@ def find_pets_by_status(status: List[StatusEnum1]) -> List[Pet]:
     pass
 
 
-@app.get('/pet/findByTags', response_model=List[Pet], tags=['pet'])
+@app.get("/pet/findByTags", response_model=List[Pet], tags=["pet"])
 def find_pets_by_tags(tags: List[str]) -> List[Pet]:
     """
     Finds Pets by tags
@@ -57,17 +56,17 @@ def find_pets_by_tags(tags: List[str]) -> List[Pet]:
     pass
 
 
-@app.get('/pet/{petId}', response_model=Pet, tags=['pet'])
-def get_pet_by_id(pet_id: int = Path(..., alias='petId')) -> Pet:
+@app.get("/pet/{petId}", response_model=Pet, tags=["pet"])
+def get_pet_by_id(pet_id: int = Path(..., alias="petId")) -> Pet:
     """
     Find pet by ID
     """
     pass
 
 
-@app.post('/pet/{petId}', response_model=None, tags=['pet'])
+@app.post("/pet/{petId}", response_model=None, tags=["pet"])
 def update_pet_with_form(
-    pet_id: int = Path(..., alias='petId'), request: Request = ...
+    pet_id: int = Path(..., alias="petId"), request: Request = ...
 ) -> None:
     """
     Updates a pet in the store with form data
@@ -75,9 +74,9 @@ def update_pet_with_form(
     pass
 
 
-@app.delete('/pet/{petId}', response_model=None, tags=['pet'])
+@app.delete("/pet/{petId}", response_model=None, tags=["pet"])
 def delete_pet(
-    api_key: Optional[str] = None, pet_id: int = Path(..., alias='petId')
+    api_key: Optional[str] = None, pet_id: int = Path(..., alias="petId")
 ) -> None:
     """
     Deletes a pet
@@ -85,9 +84,9 @@ def delete_pet(
     pass
 
 
-@app.post('/pet/{petId}/uploadImage', response_model=ApiResponse, tags=['pet'])
+@app.post("/pet/{petId}/uploadImage", response_model=ApiResponse, tags=["pet"])
 def upload_file(
-    pet_id: int = Path(..., alias='petId'), file: UploadFile = ...
+    pet_id: int = Path(..., alias="petId"), file: UploadFile = ...
 ) -> ApiResponse:
     """
     uploads an image
@@ -95,7 +94,7 @@ def upload_file(
     pass
 
 
-@app.get('/store/inventory', response_model=Dict[str, int], tags=['store'])
+@app.get("/store/inventory", response_model=Dict[str, int], tags=["store"])
 def get_inventory() -> Dict[str, int]:
     """
     Returns pet inventories by status
@@ -103,7 +102,7 @@ def get_inventory() -> Dict[str, int]:
     pass
 
 
-@app.post('/store/order', response_model=Order, tags=['store'])
+@app.post("/store/order", response_model=Order, tags=["store"])
 def place_order(body: Order) -> Order:
     """
     Place an order for a pet
@@ -111,23 +110,23 @@ def place_order(body: Order) -> Order:
     pass
 
 
-@app.get('/store/order/{orderId}', response_model=Order, tags=['store'])
-def get_order_by_id(order_id: conint(ge=1, le=5) = Path(..., alias='orderId')) -> Order:
+@app.get("/store/order/{orderId}", response_model=Order, tags=["store"])
+def get_order_by_id(order_id: conint(ge=1, le=5) = Path(..., alias="orderId")) -> Order:
     """
     Find purchase order by ID
     """
     pass
 
 
-@app.delete('/store/order/{orderId}', response_model=None, tags=['store'])
-def delete_order(order_id: str = Path(..., alias='orderId')) -> None:
+@app.delete("/store/order/{orderId}", response_model=None, tags=["store"])
+def delete_order(order_id: str = Path(..., alias="orderId")) -> None:
     """
     Delete purchase order by ID
     """
     pass
 
 
-@app.post('/user', response_model=None, tags=['user'])
+@app.post("/user", response_model=None, tags=["user"])
 def create_user(body: User) -> None:
     """
     Create user
@@ -135,7 +134,7 @@ def create_user(body: User) -> None:
     pass
 
 
-@app.post('/user/createWithArray', response_model=None, tags=['user'])
+@app.post("/user/createWithArray", response_model=None, tags=["user"])
 def create_users_with_array_input(body: List[User]) -> None:
     """
     Creates list of users with given input array
@@ -143,7 +142,7 @@ def create_users_with_array_input(body: List[User]) -> None:
     pass
 
 
-@app.post('/user/createWithList', response_model=None, tags=['user'])
+@app.post("/user/createWithList", response_model=None, tags=["user"])
 def create_users_with_list_input(body: List[User]) -> None:
     """
     Creates list of users with given input array
@@ -151,9 +150,9 @@ def create_users_with_list_input(body: List[User]) -> None:
     pass
 
 
-@app.get('/user/login', response_model=str, tags=['user'])
+@app.get("/user/login", response_model=str, tags=["user"])
 def login_user(
-    username: constr(regex=r'^[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*[a-zA-Z0-9]+$'),
+    username: constr(regex=r"^[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*[a-zA-Z0-9]+$"),
     password: str = ...,
 ) -> str:
     """
@@ -162,7 +161,7 @@ def login_user(
     pass
 
 
-@app.get('/user/logout', response_model=None, tags=['user'])
+@app.get("/user/logout", response_model=None, tags=["user"])
 def logout_user() -> None:
     """
     Logs out current logged in user session
@@ -170,7 +169,7 @@ def logout_user() -> None:
     pass
 
 
-@app.get('/user/{username}', response_model=User, tags=['user'])
+@app.get("/user/{username}", response_model=User, tags=["user"])
 def get_user_by_name(username: str) -> User:
     """
     Get user by user name
@@ -178,7 +177,7 @@ def get_user_by_name(username: str) -> User:
     pass
 
 
-@app.put('/user/{username}', response_model=None, tags=['user'])
+@app.put("/user/{username}", response_model=None, tags=["user"])
 def update_user(username: str, body: User = ...) -> None:
     """
     Updated user
@@ -186,7 +185,7 @@ def update_user(username: str, body: User = ...) -> None:
     pass
 
 
-@app.delete('/user/{username}', response_model=None, tags=['user'])
+@app.delete("/user/{username}", response_model=None, tags=["user"])
 def delete_user(username: str) -> None:
     """
     Delete user

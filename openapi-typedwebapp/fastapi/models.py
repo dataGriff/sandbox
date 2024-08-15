@@ -12,9 +12,9 @@ from pydantic import BaseModel, Field, constr
 
 
 class Status(Enum):
-    placed = 'placed'
-    approved = 'approved'
-    delivered = 'delivered'
+    placed = "placed"
+    approved = "approved"
+    delivered = "delivered"
 
 
 class Order(BaseModel):
@@ -22,13 +22,13 @@ class Order(BaseModel):
     petId: Optional[int] = None
     quantity: Optional[int] = None
     shipDate: Optional[datetime] = None
-    status: Optional[Status] = Field(None, description='Order Status')
+    status: Optional[Status] = Field(None, description="Order Status")
     complete: Optional[bool] = False
 
 
 class Category(BaseModel):
     id: Optional[int] = None
-    name: Optional[constr(regex=r'^[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*[a-zA-Z0-9]+$')] = None
+    name: Optional[constr(regex=r"^[a-zA-Z0-9]+[a-zA-Z0-9\.\-_]*[a-zA-Z0-9]+$")] = None
 
 
 class User(BaseModel):
@@ -39,7 +39,7 @@ class User(BaseModel):
     email: Optional[str] = None
     password: Optional[str] = None
     phone: Optional[str] = None
-    userStatus: Optional[int] = Field(None, description='User Status')
+    userStatus: Optional[int] = Field(None, description="User Status")
 
 
 class Tag(BaseModel):
@@ -48,18 +48,18 @@ class Tag(BaseModel):
 
 
 class Status1(Enum):
-    available = 'available'
-    pending = 'pending'
-    sold = 'sold'
+    available = "available"
+    pending = "pending"
+    sold = "sold"
 
 
 class Pet(BaseModel):
     id: Optional[int] = None
     category: Optional[Category] = None
-    name: str = Field(..., example='doggie')
+    name: str = Field(..., example="doggie")
     photoUrls: List[str]
     tags: Optional[List[Tag]] = None
-    status: Optional[Status1] = Field(None, description='pet status in the store')
+    status: Optional[Status1] = Field(None, description="pet status in the store")
 
 
 class ApiResponse(BaseModel):
@@ -69,9 +69,9 @@ class ApiResponse(BaseModel):
 
 
 class StatusEnum(Enum):
-    available = 'available'
-    pending = 'pending'
-    sold = 'sold'
+    available = "available"
+    pending = "pending"
+    sold = "sold"
 
 
 class PetFindByStatusGetResponse(BaseModel):
@@ -83,15 +83,15 @@ class PetFindByTagsGetResponse(BaseModel):
 
 
 class PetPetIdPostRequest(BaseModel):
-    name: Optional[str] = Field(None, description='Updated name of the pet')
-    status: Optional[str] = Field(None, description='Updated status of the pet')
+    name: Optional[str] = Field(None, description="Updated name of the pet")
+    status: Optional[str] = Field(None, description="Updated status of the pet")
 
 
 class PetPetIdUploadImagePostRequest(BaseModel):
     additionalMetadata: Optional[str] = Field(
-        None, description='Additional data to pass to server'
+        None, description="Additional data to pass to server"
     )
-    file: Optional[bytes] = Field(None, description='file to upload')
+    file: Optional[bytes] = Field(None, description="file to upload")
 
 
 class UserCreateWithArrayPostRequest(BaseModel):

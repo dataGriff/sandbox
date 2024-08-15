@@ -63,7 +63,7 @@ tags:
     description: Users and authentication
 
 servers:
-- url: 'https://farmstall.designapis.com/v1'
+  - url: "https://farmstall.designapis.com/v1"
 
 paths:
   /reviews:
@@ -72,12 +72,12 @@ paths:
         - Reviews
       description: Get a list of reviews
       parameters:
-      - name: maxRating
-        in: query
-        schema:
-          type: number
+        - name: maxRating
+          in: query
+          schema:
+            type: number
       responses:
-        '200':
+        "200":
           description: A bunch of reviews
           content:
             application/json:
@@ -105,10 +105,10 @@ paths:
 
     post:
       tags:
-      - Reviews
+        - Reviews
       description: Create a new Review
       security:
-      - MyUserToken: []
+        - MyUserToken: []
       requestBody:
         description: A new Review
         content:
@@ -125,7 +125,7 @@ paths:
                   maximum: 5
                   example: 5
       responses:
-        '201':
+        "201":
           description: Successfully created a new Review
           content:
             application/json:
@@ -150,25 +150,24 @@ paths:
                     pattern: '^[0-9a-fA-F\-]{36}$'
                     example: 3b5b1707-b82c-4b1d-9078-157053902525
 
-
   /reviews/{reviewId}:
     get:
       tags:
-      - Reviews
+        - Reviews
       description: Get a single review
       parameters:
-      - name: reviewId
-        in: path
-        required: true
-        schema:
-          type: string
-          description: The review's ID
-          example: 3b5b1707-b82c-4b1d-9078-157053902525
-          minLength: 36
-          maxLength: 36
-          pattern: '[a-zA-Z0-9-]+'
+        - name: reviewId
+          in: path
+          required: true
+          schema:
+            type: string
+            description: The review's ID
+            example: 3b5b1707-b82c-4b1d-9078-157053902525
+            minLength: 36
+            maxLength: 36
+            pattern: "[a-zA-Z0-9-]+"
       responses:
-        '200':
+        "200":
           description: A single review
           content:
             application/json:
@@ -186,23 +185,21 @@ paths:
                   userId:
                     minLength: 36
                     maxLength: 36
-                    pattern: '^[a-zA-Z0-9-]+$'
+                    pattern: "^[a-zA-Z0-9-]+$"
                     nullable: true
                     example: 3b5b1707-b82c-4b1d-9078-157053902525
                   uuid:
                     minLength: 36
                     maxLength: 36
-                    pattern: '^[a-zA-Z0-9-]+$'
+                    pattern: "^[a-zA-Z0-9-]+$"
                     example: 3b5b1707-b82c-4b1d-9078-157053902525
-        '404':
+        "404":
           description: Review not found
-
-
 
   /users:
     post:
       tags:
-      - Users
+        - Users
       description: Create a new user
       requestBody:
         description: User details
@@ -221,7 +218,7 @@ paths:
                   type: string
                   example: Josh Ponelat
       responses:
-        '201':
+        "201":
           description: Successfully created a new user
           content:
             application/json:
@@ -235,11 +232,10 @@ paths:
                     type: string
                     example: f7f680a8-d111-421f-b6b3-493ebf905078
 
-
   /tokens:
     post:
       tags:
-      - Users
+        - Users
       description: Create a new token
       requestBody:
         content:
@@ -255,7 +251,7 @@ paths:
                   format: password
 
       responses:
-        '201':
+        "201":
           description: Create a new token for gaining authenticated access to resources
           content:
             application/json:
@@ -264,7 +260,6 @@ paths:
                 properties:
                   token:
                     type: string
-
 
 components:
   securitySchemes:
